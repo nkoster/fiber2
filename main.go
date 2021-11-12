@@ -22,7 +22,6 @@ const (
 )
 
 type Topic struct {
-	Id          string `json:"id"`
 	Kafka_topic string `json:"kafka_topic"`
 }
 
@@ -57,12 +56,15 @@ func main() {
 		}
 		defer rows.Close()
 		result := Topics{}
+		id := ""
+		// this is basically a dummy because we don't need the id,
+		// but we need to pass something to rows.Scan(), like &id
 		for rows.Next() {
 			topic := Topic{}
-			if err := rows.Scan(&topic.Id, &topic.Kafka_topic); err != nil {
+			if err := rows.Scan(&id, &topic.Kafka_topic); err != nil {
 				return err
 			}
-			fmt.Println(topic.Kafka_topic)
+			fmt.Println(id, topic.Kafka_topic)
 			result.Topics = append(result.Topics, topic)
 		}
 		fmt.Printf("%d topic%s received.", len(result.Topics),
