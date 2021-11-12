@@ -65,7 +65,8 @@ func main() {
 			fmt.Println(topic.Kafka_topic)
 			result.Topics = append(result.Topics, topic)
 		}
-		fmt.Println("topics received:", len(result.Topics))
+		fmt.Printf("%d topic%s received.", len(result.Topics),
+			(map[bool]string{true: "", false: "s"})[len(result.Topics) == 1])
 		return c.JSON(result)
 	})
 
