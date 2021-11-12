@@ -42,15 +42,10 @@ func Connect() error {
 }
 
 func main() {
-
 	if err := Connect(); err != nil {
 		log.Fatal(err)
 	}
-
 	app := fiber.New()
-
 	app.Get("/topics", topics)
-
 	log.Fatal(app.Listen(":3000"))
-
 }
