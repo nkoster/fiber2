@@ -2,3 +2,5 @@ client_postgres.crt
 client_postgres.key
 root.crt
 fiber
+.env
+.idea
