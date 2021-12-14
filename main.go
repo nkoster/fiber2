@@ -2,24 +2,14 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 var db *sql.DB
-
-const (
-	host        = "db.fhirstation.net"
-	port        = 50505
-	sslcert     = "./client_postgres.crt"
-	sslkey      = "./client_postgres.key"
-	sslrootcert = "./root.crt"
-	sslmode     = "verify-ca"
-	user        = "postgres"
-)
 
 type Topic struct {
 	Kafka_topic string `json:"kafka_topic"`
@@ -29,23 +19,33 @@ type Topics struct {
 	Topics []Topic `json:"topics"`
 }
 
-func Connect() error {
-	var err error
-	db, err = sql.Open("postgres", fmt.Sprintf("host=%s port=%d user=%s sslmode=%s sslcert=%s sslkey=%s sslrootcert=%s", host, port, user, sslmode, sslcert, sslkey, sslrootcert))
-	if err != nil {
-		return err
-	}
-	if err = db.Ping(); err != nil {
-		return err
-	}
-	return nil
+type Message struct {
+	QueryKafkaTopic      string `json:"queryKafkaTopic"`
+	QueryKafkaPartition  string `json:"queryKafkaPartition"`
+	QueryKafkaOffset     string `json:"queryKafkaOffset"`
+	QueryIdentifierType  string `json:"queryIdentifierType"`
+	QueryIdentifierValue string `json:"queryIdentifierValue"`
+}
+
+type Messages struct {
+	Messages []Message `json:"messages"`
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 	if err := Connect(); err != nil {
 		log.Fatal(err)
 	}
+
 	app := fiber.New()
-	app.Get("/topics", topics)
-	log.Fatal(app.Listen(":3000"))
+
+	app.Post("/kafka", kafka)
+	app.Post("/seeker", seeker)
+	app.Post("/topics", topics)
+
+	log.Fatal(app.Listen(":3030"))
+
 }
