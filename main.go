@@ -32,11 +32,15 @@ type Messages struct {
 }
 
 func main() {
-	err := godotenv.Load()
+
+	var err error
+
+	err = godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	if err := Connect(); err != nil {
+
+	if err = Connect(); err != nil {
 		log.Fatal(err)
 	}
 
