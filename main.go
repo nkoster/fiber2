@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
@@ -20,11 +21,11 @@ type Topics struct {
 }
 
 type Message struct {
-	QueryKafkaTopic      string `json:"queryKafkaTopic"`
-	QueryKafkaPartition  string `json:"queryKafkaPartition"`
-	QueryKafkaOffset     string `json:"queryKafkaOffset"`
-	QueryIdentifierType  string `json:"queryIdentifierType"`
-	QueryIdentifierValue string `json:"queryIdentifierValue"`
+	QueryKafkaTopic      string `json:"kafka_topic"`
+	QueryKafkaPartition  string `json:"kafka_partition"`
+	QueryKafkaOffset     string `json:"kafka_offset"`
+	QueryIdentifierType  string `json:"identifier_type"`
+	QueryIdentifierValue string `json:"identifier_value"`
 }
 
 type Messages struct {
@@ -45,6 +46,8 @@ func main() {
 	}
 
 	app := fiber.New()
+
+	app.Use(cors.New())
 
 	app.Post("/kafka", kafka)
 	app.Post("/seeker", seeker)
