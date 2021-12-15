@@ -9,7 +9,6 @@ import (
 func seeker(c *fiber.Ctx) error {
 	payload := struct {
 		QueryKafkaTopic      string `json:"queryKafkaTopic"`
-		QueryKafkaOffset     string `json:"queryKafkaOffset"`
 		QueryIdentifierType  string `json:"queryIdentifierType"`
 		QueryIdentifierValue string `json:"queryIdentifierValue"`
 	}{}
