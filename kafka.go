@@ -8,8 +8,20 @@ import (
 )
 
 func kafka(c *fiber.Ctx) error {
+
+	payload := struct {
+		Topic     string `json:"topic"`
+		Partition string `json:"partition"`
+		Offset    string `json:"offset"`
+	}{}
+	if err := c.BodyParser(&payload); err != nil {
+		return err
+	}
+
 	c.Set("Content-type", "application/json; charset=utf-8")
-	out, err := exec.Command("kafkacat", "-C", "-b", "localhost:9092", "-t", "fhir3.databus.portavita.pvt_medrie_zwolle.patient", "-p", "0", "-o", "989272", "-c", "1", "-e", "-q").Output()
+
+	out, err := exec.Command("kafkacat", "-C", "-b", "localhost:9092", "-t",
+		payload.Topic, "-p", payload.Partition, "-o", payload.Offset, "-c", "1", "-e", "-q").Output()
 	if err != nil {
 		fmt.Println(err)
 	}
