@@ -22,7 +22,7 @@ func topics(c *fiber.Ctx) error {
 		}
 		result.Topics = append(result.Topics, topic)
 	}
-	fmt.Printf("%d topic%s received.", len(result.Topics),
+	fmt.Printf("%d topic%s received.\n", len(result.Topics),
 		(map[bool]string{true: "", false: "s"})[len(result.Topics) == 1],
 	)
 	return c.JSON(result)
