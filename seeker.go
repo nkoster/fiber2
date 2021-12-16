@@ -20,7 +20,7 @@ func seeker(c *fiber.Ctx) error {
 		return err
 	}
 
-	sqlKill := `WITH pids AS (
+	sqlCancel := `WITH pids AS (
 		/*notthisone*/
 		SELECT pid
 		FROM   pg_stat_activity
@@ -30,9 +30,9 @@ func seeker(c *fiber.Ctx) error {
 	)
 	SELECT pg_cancel_backend(pid) FROM pids
 	`
-	sqlKill = fmt.Sprintf(sqlKill, payload.QueryId)
+	sqlCancel = fmt.Sprintf(sqlCancel, payload.QueryId)
 
-	cancel, err := db.Query(sqlKill)
+	cancel, err := db.Query(sqlCancel)
 	if err != nil {
 		fmt.Println(err)
 	}
