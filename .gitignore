@@ -5,3 +5,4 @@ kafkasearch-ui
 .env
 .idea
 request.rest
+ui
