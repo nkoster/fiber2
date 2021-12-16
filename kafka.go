@@ -24,6 +24,10 @@ func kafka(c *fiber.Ctx) error {
 		payload.Topic, "-p", payload.Partition, "-o", payload.Offset, "-c", "1", "-e", "-q").Output()
 	if err != nil {
 		fmt.Println(err)
+		return c.Status(500).SendString(err.Error())
 	}
+
+	fmt.Println("kafka:", payload.Topic, payload.Partition, payload.Offset)
 	return c.Send(out)
+
 }
