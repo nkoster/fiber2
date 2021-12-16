@@ -1,7 +1,7 @@
 client_postgres.crt
 client_postgres.key
 root.crt
-fiber
+kafkasearch-ui
 .env
 .idea
 request.rest
