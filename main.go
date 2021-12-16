@@ -46,6 +46,8 @@ func main() {
 
 	app := fiber.New()
 
+	app.Static("/", "./ui")
+
 	app.Use(cors.New())
 
 	app.Post("/kafka", kafka)
