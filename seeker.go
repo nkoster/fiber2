@@ -32,15 +32,15 @@ func seeker(c *fiber.Ctx) error {
 	`
 	sqlKill = fmt.Sprintf(sqlKill, payload.QueryId)
 
-	killed, err := db.Query(sqlKill)
+	cancel, err := db.Query(sqlKill)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	defer killed.Close()
+	defer cancel.Close()
 
 	counter := 0
-	for killed.Next() {
+	for cancel.Next() {
 		counter++
 	}
 
@@ -80,7 +80,7 @@ func seeker(c *fiber.Ctx) error {
 		result.Messages = append(result.Messages, message)
 	}
 
-	fmt.Printf("%d message%s received.\n", len(result.Messages),
+	fmt.Printf("pg: %d message%s received.\n", len(result.Messages),
 		(map[bool]string{true: "", false: "s"})[len(result.Messages) == 1],
 	)
 
