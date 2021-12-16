@@ -63,7 +63,9 @@ func seeker(c *fiber.Ctx) error {
 		return c.Status(500).SendString(err.Error())
 	}
 	defer rows.Close()
+
 	result := Messages{}
+
 	for rows.Next() {
 		message := Message{}
 		if err := rows.Scan(
@@ -77,8 +79,11 @@ func seeker(c *fiber.Ctx) error {
 		}
 		result.Messages = append(result.Messages, message)
 	}
+
 	fmt.Printf("%d message%s received.\n", len(result.Messages),
 		(map[bool]string{true: "", false: "s"})[len(result.Messages) == 1],
 	)
+
 	return c.JSON(result)
+
 }
