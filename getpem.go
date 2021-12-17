@@ -4,13 +4,15 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 func getPem() error {
 
 	var err error
 
-	resp, err := http.Get("https://oic.dev.portavita.nl/certs")
+	oidc := os.Getenv("OIDC_BACKEND")
+	resp, err := http.Get(oidc)
 
 	if err != nil {
 		log.Fatal(err)
