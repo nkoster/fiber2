@@ -44,6 +44,10 @@ func main() {
 		log.Fatal(err)
 	}
 
+	if err = getPem(); err != nil {
+		log.Fatal(err)
+	}
+
 	app := fiber.New()
 
 	app.Static("/", "./ui")
