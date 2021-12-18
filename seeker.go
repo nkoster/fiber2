@@ -2,11 +2,14 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func seeker(c *fiber.Ctx) error {
+
+	defer timeTrack(time.Now(), "seeker")
 
 	var err error
 
@@ -80,7 +83,7 @@ func seeker(c *fiber.Ctx) error {
 		result.Messages = append(result.Messages, message)
 	}
 
-	fmt.Printf("pg: %d message%s received.\n", len(result.Messages),
+	fmt.Printf("seeker: %d message%s received.\n", len(result.Messages),
 		(map[bool]string{true: "", false: "s"})[len(result.Messages) == 1],
 	)
 
