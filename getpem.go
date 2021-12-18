@@ -5,13 +5,16 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func getPem() error {
 
+	defer timeTrack(time.Now(), "getPem")
+
 	var err error
 
-	oidc := os.Getenv("OIDC_BACKEND")
+	oidc := os.Getenv("OIDC_ENDPOINT")
 	resp, err := http.Get(oidc)
 
 	if err != nil {
