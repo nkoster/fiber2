@@ -3,11 +3,14 @@ package main
 import (
 	"fmt"
 	"os/exec"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func kafka(c *fiber.Ctx) error {
+
+	defer timeTrack(time.Now(), "seeker")
 
 	payload := struct {
 		Topic     string `json:"topic"`
