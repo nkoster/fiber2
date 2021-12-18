@@ -10,7 +10,7 @@ import (
 
 func kafka(c *fiber.Ctx) error {
 
-	defer timeTrack(time.Now(), "seeker")
+	defer timeTrack(time.Now(), "kafka")
 
 	payload := struct {
 		Topic     string `json:"topic"`
