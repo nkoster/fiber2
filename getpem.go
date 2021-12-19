@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -8,7 +9,7 @@ import (
 	"time"
 )
 
-func getPem() error {
+func getPem() (Keys, error) {
 
 	defer timeTrack(time.Now(), "getPem")
 
@@ -28,12 +29,14 @@ func getPem() error {
 	}
 
 	sb := string(body)
-	log.Println(sb)
+
+	var pemData Keys
+	json.Unmarshal([]byte(sb), &pemData)
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	return nil
+	return pemData, nil
 
 }
