@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 	"time"
 
@@ -23,7 +24,7 @@ func kafka(c *fiber.Ctx) error {
 
 	c.Set("Content-type", "application/json; charset=utf-8")
 
-	out, err := exec.Command("kafkacat", "-C", "-b", "localhost:9092", "-t",
+	out, err := exec.Command("kafkacat", "-C", "-b", os.Getenv("KAFKA_HOST"), "-t",
 		payload.Topic, "-p", payload.Partition, "-o", payload.Offset, "-c", "1", "-e", "-q").Output()
 	if err != nil {
 		fmt.Println(err)
