@@ -8,7 +8,7 @@ import (
 
 func oidc(c *fiber.Ctx) error {
 
-	fmt.Println("Request:", c.Get("Authorization"))
+	fmt.Println("oidc:", c.Get("Authorization"))
 
 	c.Next()
 
