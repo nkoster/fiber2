@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -32,9 +33,24 @@ type Messages struct {
 	Messages []Message `json:"messages"`
 }
 
+type Key struct {
+	KTY string `json:"kty"`
+	E   string `json:"e"`
+	USE string `json:"use"`
+	KID string `json:"kid"`
+	ALG string `json:"alg"`
+	N   string `json:"n"`
+}
+
+type Keys struct {
+	Keys []Key `json:"keys"`
+}
+
 func main() {
 
 	var err error
+
+	var pem Keys
 
 	if err = godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
@@ -44,9 +60,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if err = getPem(); err != nil {
+	if pem, err = getPem(); err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Printf("KTY=%v ALG=%v\n", pem.Keys[0].KTY, pem.Keys[0].ALG)
 
 	app := fiber.New()
 
