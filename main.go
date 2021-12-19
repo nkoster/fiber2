@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -64,13 +65,18 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("KTY=%v ALG=%v\n", pem.Keys[0].KTY, pem.Keys[0].ALG)
+	fmt.Printf("KTY=%v ALG=%v ", pem.Keys[0].KTY, pem.Keys[0].ALG)
 
 	app := fiber.New()
 
 	app.Static("/", "./ui")
 
-	app.Use(cors.New())
+	if os.Getenv("DEV_MODE") == "true" {
+		app.Use(cors.New())
+		fmt.Println("MODE=DEV")
+	} else {
+		fmt.Println("MODE=PROD")
+	}
 
 	app.Post("/kafka", kafka)
 	app.Post("/seeker", seeker)
