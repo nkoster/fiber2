@@ -25,7 +25,7 @@ func getAccessToken(s string) string {
 func validateAccessToken(token string) string {
 
 	client := &http.Client{}
-	URL := os.Getenv("OIDC_INTRSPECT")
+	URL := os.Getenv("OIDC_INTROSPECT")
 	v := url.Values{}
 
 	v.Set("token", token)
