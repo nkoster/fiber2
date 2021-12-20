@@ -19,9 +19,11 @@ func oidc(c *fiber.Ctx) error {
 
 	fmt.Println(access_token)
 	// check if access_token is valid via /introspect
-	if err := validateAccessToken(access_token); err != nil {
+	if body := validateAccessToken(access_token); body == "" {
 		fmt.Println("Invalid token")
 	} else {
+		// Parse json in body
+		// Test if token is active
 		c.Next()
 	}
 
