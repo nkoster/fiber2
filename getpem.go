@@ -15,7 +15,7 @@ func getPem() (Keys, error) {
 
 	var err error
 
-	oidc := os.Getenv("OIDC_ENDPOINT")
+	oidc := os.Getenv("OIDC_CERTS")
 	resp, err := http.Get(oidc)
 
 	if err != nil {
