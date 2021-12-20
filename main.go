@@ -73,9 +73,9 @@ func main() {
 
 	if os.Getenv("DEV_MODE") == "true" {
 		app.Use(cors.New())
-		fmt.Print("MODE=DEV")
+		fmt.Print("MODE=DEV ")
 	} else {
-		fmt.Print("MODE=PROD")
+		fmt.Print("MODE=PROD ")
 	}
 
 	if os.Getenv("USE_AUTH") == "false" {
