@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
@@ -25,7 +26,29 @@ func oidc(c *fiber.Ctx) error {
 		fmt.Println(body)
 		// Parse json in body
 		// Test if token is active
-		c.Next()
+		var token_state TokenState
+		json.Unmarshal([]byte(body), &token_state)
+		fmt.Println("STATE", token_state)
+		if token_state.Active {
+			fmt.Println("ACTIVE")
+			// get SSO context
+			ssoContext := getSsoContext(access_token)
+			fmt.Println(ssoContext)
+			// Verify ssoContext JWT
+			if len(ssoContext) > 1 {
+				if verifySsoContext(ssoContext) {
+					return c.Next()
+				} else {
+					fmt.Println("DENIED")
+					return c.Status(401).SendString("Please login first.")
+				}
+			}
+			c.Next()
+		} else {
+			fmt.Println("DENIED")
+			return c.Status(401).SendString("Please login first.")
+		}
+		// c.Next()
 	}
 
 	return nil
