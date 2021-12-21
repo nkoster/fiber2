@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"crypto/rsa"
 	"encoding/base64"
+	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -16,8 +18,6 @@ import (
 func getPem() (rsa.PublicKey, error) {
 
 	defer timeTrack(time.Now(), "getPem")
-
-	var err error
 
 	oidc := os.Getenv("OIDC_CERTS")
 	resp, err := http.Get(oidc)
@@ -35,41 +35,44 @@ func getPem() (rsa.PublicKey, error) {
 	sb := string(body)
 
 	var pemData Keys
+
 	json.Unmarshal([]byte(sb), &pemData)
 
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	N, err := base64.StdEncoding.DecodeString(pemData.Keys[0].N)
+	decN, err := base64.StdEncoding.DecodeString(pemData.Keys[0].N)
 
 	if err != nil {
-		fmt.Println(N, err)
+		fmt.Println(err)
 	}
 
-	NN := new(big.Int)
-	NN.SetBytes(N)
+	n := big.NewInt(0)
 
-	E, err := base64.StdEncoding.DecodeString(pemData.Keys[0].E)
+	n.SetBytes(decN)
+
+	decE, err := base64.StdEncoding.DecodeString(pemData.Keys[0].E)
+
 	if err != nil {
-		fmt.Println(E, err)
+		fmt.Println(err)
 	}
 
-	// EE := new(big.Int)
-	// EEE := EE.SetBytes(E).SetInt64()
+	var eBytes []byte
 
-	// EEE = EE.Int64()
-	// fmt.Println("pemData ALG", pemData.Keys[0].ALG)
-	// fmt.Println("pemData E", pemData.Keys[0].E)
-	// fmt.Println("pemData KID", pemData.Keys[0].KID)
-	// fmt.Println("pemData KTY", pemData.Keys[0].KTY)
-	// fmt.Println("pemData N", pemData.Keys[0].N)
-	// fmt.Println("pemData USE", pemData.Keys[0].USE)
+	if len(decE) < 8 {
+		eBytes = make([]byte, 8-len(decE), 8)
+		eBytes = append(eBytes, decE...)
+	} else {
+		eBytes = decE
+	}
 
-	// pem := rsa.PublicKey{N: NN, E: int(EEE)}
+	eReader := bytes.NewReader(eBytes)
 
-	fmt.Println("pemmie", pem)
+	var e uint64
 
-	return pem, nil
+	err = binary.Read(eReader, binary.BigEndian, &e)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return rsa.PublicKey{N: n, E: int(e)}, nil
 
 }
