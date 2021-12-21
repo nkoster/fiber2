@@ -2,7 +2,7 @@ client_postgres.crt
 client_postgres.key
 root.crt
 kafkasearch-ui
-.env
+.env*
 .idea
 request.rest
 ui
