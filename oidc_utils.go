@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/rsa"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -86,6 +87,7 @@ func getSsoContext(token string) string {
 
 }
 
-func verifySsoContext(jwt string) bool {
+func verifySsoContext(jwt string, pem rsa.PublicKey) bool {
+
 	return true
 }
