@@ -1,15 +1,19 @@
 package main
 
 import (
+	"crypto/rsa"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
+	"math/big"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
-func getPem() (Keys, error) {
+func getPem() (rsa.PublicKey, error) {
 
 	defer timeTrack(time.Now(), "getPem")
 
@@ -37,6 +41,18 @@ func getPem() (Keys, error) {
 		log.Fatalln(err)
 	}
 
-	return pemData, nil
+	N := big.NewInt(0)
+	N.SetBytes([]byte(pemData.Keys[0].N))
+
+	E, err := strconv.Atoi(pemData.Keys[0].E)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	pem := rsa.PublicKey{N: N, E: E}
+
+	fmt.Println("pemmie", pem)
+
+	return pem, nil
 
 }
