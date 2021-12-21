@@ -1,9 +1,11 @@
 package main
 
 import (
+	"crypto/rsa"
 	"database/sql"
 	"fmt"
 	"log"
+	"math/big"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -47,11 +49,17 @@ type Keys struct {
 	Keys []Key `json:"keys"`
 }
 
+type TokenState struct {
+	Active bool    `json:"active"`
+	Exp    big.Int `json:"exp"`
+	Scope  string  `json:"scope"`
+}
+
 func main() {
 
 	var err error
 
-	var pem Keys
+	var pem rsa.PublicKey
 
 	if err = godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
@@ -65,7 +73,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("KTY=%v ALG=%v ", pem.Keys[0].KTY, pem.Keys[0].ALG)
+	fmt.Println(pem)
 
 	app := fiber.New()
 
