@@ -55,3 +55,37 @@ func validateAccessToken(token string) string {
 	return string(bodyText)
 
 }
+
+func getSsoContext(token string) string {
+
+	client := &http.Client{}
+
+	URL := os.Getenv("OIDC_SSO_CONTEXT")
+
+	req, err := http.NewRequest("GET", URL, nil)
+
+	req.Header.Add("Authorization", "Bearer "+token)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	resp, err := client.Do(req)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	bodyText, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return string(bodyText)
+
+}
+
+func verifySsoContext(jwt string) bool {
+	return true
+}
