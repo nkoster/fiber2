@@ -55,11 +55,11 @@ type TokenState struct {
 	Scope  string  `json:"scope"`
 }
 
+var pem rsa.PublicKey
+
 func main() {
 
 	var err error
-
-	var pem rsa.PublicKey
 
 	if err = godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
