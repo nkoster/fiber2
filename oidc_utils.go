@@ -9,6 +9,8 @@ import (
 	"net/url"
 	"os"
 	"strings"
+
+	jwt "github.com/dgrijalva/jwt-go"
 )
 
 func getAccessToken(s string) string {
@@ -87,7 +89,17 @@ func getSsoContext(token string) string {
 
 }
 
-func verifySsoContext(jwt string, pem rsa.PublicKey) bool {
+func verifySsoContext(token string, key rsa.PublicKey) bool {
+
+	parts := strings.Split(token, ".")
+
+	err := jwt.SigningMethodRS256.Verify(strings.Join(parts[0:2], "."), parts[2], key)
+
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
 
 	return true
+
 }
