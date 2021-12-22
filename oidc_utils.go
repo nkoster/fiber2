@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/rsa"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -89,11 +88,17 @@ func getSsoContext(token string) string {
 
 }
 
-func verifySsoContext(token string, key rsa.PublicKey) bool {
+func verifySsoContext(token string, key string) bool {
 
 	parts := strings.Split(token, ".")
 
-	err := jwt.SigningMethodRS256.Verify(strings.Join(parts[0:2], "."), parts[2], key)
+	signingKey, err := jwt.ParseRSAPublicKeyFromPEM([]byte(key))
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = jwt.SigningMethodRS256.Verify(strings.Join(parts[0:2], "."), parts[2], signingKey)
 
 	if err != nil {
 		fmt.Println(err)

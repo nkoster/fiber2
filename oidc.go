@@ -36,7 +36,7 @@ func oidc(c *fiber.Ctx) error {
 			fmt.Println(ssoContext)
 			// Verify ssoContext JWT
 			if len(ssoContext) > 1 {
-				if verifySsoContext(ssoContext, pem) {
+				if verifySsoContext(ssoContext, pemFile) {
 					return c.Next()
 				} else {
 					fmt.Println("DENIED")
