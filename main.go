@@ -70,12 +70,6 @@ func main() {
 
 	pemFile = getPem()
 
-	// if pem, err = getPem(); err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	fmt.Println(pemFile)
-
 	app := fiber.New()
 
 	app.Static("/", "./ui")
