@@ -1,15 +1,21 @@
 package main
 
 import (
+	"bytes"
+	"crypto/rsa"
+	"encoding/base64"
+	"encoding/binary"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
+	"math/big"
 	"net/http"
 	"os"
 	"time"
 )
 
-func getPem() Keys {
+func getPem() (rsa.PublicKey, error) {
 
 	defer timeTrack(time.Now(), "getPem")
 
@@ -32,33 +38,41 @@ func getPem() Keys {
 
 	json.Unmarshal([]byte(sb), &pemData)
 
-	return pemData
+	decN, err := base64.RawURLEncoding.DecodeString(pemData.Keys[0].N)
 
-	// nb, err := base64.RawURLEncoding.DecodeString(pemData.Keys[0].N)
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
+	n := big.NewInt(0)
 
-	// e := 65537
+	n.SetBytes(decN)
 
-	// pk := &rsa.PublicKey{
-	// 	N: new(big.Int).SetBytes(nb),
-	// 	E: e,
-	// }
+	decE, err := base64.RawURLEncoding.DecodeString(pemData.Keys[0].E)
 
-	// der, err := x509.MarshalPKIXPublicKey(pk)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	// block := &pem.Block{
-	// 	Type:  "RSA PUBLIC KEY",
-	// 	Bytes: der,
-	// }
+	var eBytes []byte
 
-	// var out bytes.Buffer
-	// pem.Encode(&out, block)
-	// return out.String()
+	if len(decE) < 8 {
+		eBytes = make([]byte, 8-len(decE), 8)
+		eBytes = append(eBytes, decE...)
+	} else {
+		eBytes = decE
+	}
+
+	eReader := bytes.NewReader(eBytes)
+
+	var e uint64
+
+	err = binary.Read(eReader, binary.BigEndian, &e)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return rsa.PublicKey{N: n, E: int(e)}, nil
 
 }

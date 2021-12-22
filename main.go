@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/rsa"
 	"database/sql"
 	"fmt"
 	"log"
@@ -54,7 +55,7 @@ type TokenState struct {
 	Scope  string  `json:"scope"`
 }
 
-var pemFile Keys
+var pem rsa.PublicKey
 
 func main() {
 
@@ -68,13 +69,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	pemFile = getPem()
+	if pem, err = getPem(); err != nil {
+		log.Fatal(err)
+	}
 
-	// if pem, err = getPem(); err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	fmt.Println(pemFile)
+	fmt.Println(pem)
 
 	app := fiber.New()
 
