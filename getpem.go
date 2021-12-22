@@ -1,22 +1,15 @@
 package main
 
 import (
-	"bytes"
-	"crypto/rsa"
-	"crypto/x509"
-	"encoding/base64"
 	"encoding/json"
-	"encoding/pem"
-	"fmt"
 	"io/ioutil"
 	"log"
-	"math/big"
 	"net/http"
 	"os"
 	"time"
 )
 
-func getPem() string {
+func getPem() Keys {
 
 	defer timeTrack(time.Now(), "getPem")
 
@@ -39,31 +32,33 @@ func getPem() string {
 
 	json.Unmarshal([]byte(sb), &pemData)
 
-	nb, err := base64.RawURLEncoding.DecodeString(pemData.Keys[0].N)
+	return pemData
 
-	if err != nil {
-		fmt.Println(err)
-	}
+	// nb, err := base64.RawURLEncoding.DecodeString(pemData.Keys[0].N)
 
-	e := 65537
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
 
-	pk := &rsa.PublicKey{
-		N: new(big.Int).SetBytes(nb),
-		E: e,
-	}
+	// e := 65537
 
-	der, err := x509.MarshalPKIXPublicKey(pk)
-	if err != nil {
-		log.Fatal(err)
-	}
+	// pk := &rsa.PublicKey{
+	// 	N: new(big.Int).SetBytes(nb),
+	// 	E: e,
+	// }
 
-	block := &pem.Block{
-		Type:  "RSA PUBLIC KEY",
-		Bytes: der,
-	}
+	// der, err := x509.MarshalPKIXPublicKey(pk)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	var out bytes.Buffer
-	pem.Encode(&out, block)
-	return out.String()
+	// block := &pem.Block{
+	// 	Type:  "RSA PUBLIC KEY",
+	// 	Bytes: der,
+	// }
+
+	// var out bytes.Buffer
+	// pem.Encode(&out, block)
+	// return out.String()
 
 }
