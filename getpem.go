@@ -38,7 +38,7 @@ func getPem() (rsa.PublicKey, error) {
 
 	json.Unmarshal([]byte(sb), &pemData)
 
-	decN, err := base64.StdEncoding.DecodeString(pemData.Keys[0].N)
+	decN, err := base64.RawURLEncoding.DecodeString(pemData.Keys[0].N)
 
 	if err != nil {
 		fmt.Println(err)
@@ -48,7 +48,7 @@ func getPem() (rsa.PublicKey, error) {
 
 	n.SetBytes(decN)
 
-	decE, err := base64.StdEncoding.DecodeString(pemData.Keys[0].E)
+	decE, err := base64.RawURLEncoding.DecodeString(pemData.Keys[0].E)
 
 	if err != nil {
 		fmt.Println(err)
