@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -88,6 +89,14 @@ func getSsoContext(token string) string {
 
 }
 
+type Organization struct {
+	PvEntityId int `json:"pv_entity_id"`
+}
+
+type Sso struct {
+	Organization Organization
+}
+
 func verifySsoContext(token string, key string) bool {
 
 	parts := strings.Split(token, ".")
@@ -105,6 +114,13 @@ func verifySsoContext(token string, key string) bool {
 		return false
 	}
 
-	return true
+	ssoJson, _ := jwt.DecodeSegment(parts[1])
+
+	var sso Sso
+
+	json.Unmarshal(ssoJson, &sso)
+
+	// test if pv_entity_id == 3 (WIP)
+	return sso.Organization.PvEntityId == 3
 
 }
