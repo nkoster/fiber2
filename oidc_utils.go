@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/rsa"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -89,7 +88,7 @@ func getSsoContext(token string) string {
 
 }
 
-func verifySsoContext(token string, key rsa.PublicKey) bool {
+func verifySsoContext(token string, key string) bool {
 
 	parts := strings.Split(token, ".")
 
