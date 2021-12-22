@@ -88,11 +88,11 @@ func getSsoContext(token string) string {
 
 }
 
-func verifySsoContext(token string, key string) bool {
+func verifySsoContext(token string, key Keys) bool {
 
 	parts := strings.Split(token, ".")
 
-	err := jwt.SigningMethodRS256.Verify(strings.Join(parts[0:2], "."), parts[2], []byte(key))
+	err := jwt.SigningMethodRS256.Verify(strings.Join(parts[0:2], "."), parts[2], key)
 
 	if err != nil {
 		fmt.Println(err)
