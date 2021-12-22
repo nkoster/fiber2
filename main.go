@@ -54,7 +54,7 @@ type TokenState struct {
 	Scope  string  `json:"scope"`
 }
 
-var pemFile string
+var pemFile Keys
 
 func main() {
 
