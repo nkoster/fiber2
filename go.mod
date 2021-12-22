@@ -3,6 +3,7 @@ module kafkasearch-ui
 go 1.17
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gofiber/fiber/v2 v2.23.0
 	github.com/joho/godotenv v1.4.0
 	github.com/lib/pq v1.10.4
@@ -10,7 +11,6 @@ require (
 
 require (
 	github.com/andybalholm/brotli v1.0.2 // indirect
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/klauspost/compress v1.13.4 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.31.0 // indirect
