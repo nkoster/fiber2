@@ -92,7 +92,7 @@ func verifySsoContext(token string, key string) bool {
 
 	parts := strings.Split(token, ".")
 
-	err := jwt.SigningMethodRS256.Verify(strings.Join(parts[0:2], "."), parts[2], key)
+	err := jwt.SigningMethodRS256.Verify(strings.Join(parts[0:2], "."), parts[2], []byte(key))
 
 	if err != nil {
 		fmt.Println(err)
