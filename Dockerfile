@@ -40,4 +40,4 @@ RUN \
 
 USER app
 
-CMD ["sleep", "30000000"]
+CMD ["/kafkasearch-ui"]
