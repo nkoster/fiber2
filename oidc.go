@@ -24,10 +24,8 @@ func oidc(c *fiber.Ctx) error {
 	} else {
 		// Parse json in body
 		// Test if token is active
-		fmt.Println(body)
 		var token_state TokenState
 		json.Unmarshal([]byte(body), &token_state)
-		// fmt.Println(token_state)
 		if token_state.Active {
 			// get SSO context
 			ssoContext := getSsoContext(access_token)
