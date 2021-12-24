@@ -60,6 +60,8 @@ func main() {
 
 	var err error
 
+	fmt.Println(os.Args[0] + " starting.")
+
 	if err = godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
 	}
@@ -70,8 +72,11 @@ func main() {
 
 	pemFile = getPem()
 
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		DisableStartupMessage: true,
+	})
 
+	fmt.Println("Serving static files: ./ui")
 	app.Static("/", "./ui")
 
 	if os.Getenv("DEV_MODE") == "true" {
@@ -88,8 +93,13 @@ func main() {
 		fmt.Println("AUTH=true")
 	}
 
+	fmt.Println("Loading POST route: /kafka")
 	app.Post("/kafka", kafka)
+
+	fmt.Println("Loading POST route: /seeker")
 	app.Post("/seeker", seeker)
+
+	fmt.Println("Loading POST route: /topics")
 	app.Post("/topics", topics)
 
 	log.Fatal(app.Listen(":3030"))
