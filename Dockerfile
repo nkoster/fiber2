@@ -1,10 +1,10 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} bitnami/minideb:latest
 
-COPY kafkasearch-ui kafkasearch-ui
-COPY client_postgres.key client_postgres.key
-COPY client_postgres.crt client_postgres.crt
-COPY root.crt root.crt
-COPY ui/ ui/
+COPY kafkasearch-ui /app/kafkasearch-ui
+COPY client_postgres.key /app/client_postgres.key
+COPY client_postgres.crt /app/client_postgres.crt
+COPY root.crt /app/root.crt
+COPY ui/ /app/ui/
 
 RUN \
     apt-get update && \
@@ -34,10 +34,10 @@ RUN \
     groupadd app && \
     useradd -g app -m -s /bin/bash app && \
     chown app:app -R /app && \
-    chown app:app /client_postgres.key && \
+    chown app:app /app/client_postgres.key && \
     touch .env && \
     chmod 777 /tmp
 
 USER app
 
-CMD ["/kafkasearch-ui"]
+CMD ["/app/kafkasearch-ui"]
