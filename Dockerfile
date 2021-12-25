@@ -6,6 +6,8 @@ COPY client_postgres.crt /app/client_postgres.crt
 COPY root.crt /app/root.crt
 COPY ui/ /app/ui/
 
+WORKDIR /app
+
 RUN \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
