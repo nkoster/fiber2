@@ -16,7 +16,7 @@ import (
 var db *sql.DB
 
 type Topic struct {
-	Kafka_topic string `json:"kafka_topic"`
+	KafkaTopic string `json:"kafka_topic"`
 }
 
 type Topics struct {
@@ -73,7 +73,7 @@ func main() {
 	pemFile = getPem()
 
 	app := fiber.New(fiber.Config{
-		DisableStartupMessage: true,
+		DisableStartupMessage: false,
 	})
 
 	UI := os.Getenv("UI")
