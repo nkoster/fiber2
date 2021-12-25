@@ -13,13 +13,13 @@ func oidc(c *fiber.Ctx) error {
 
 	if len(access_token) == 0 {
 		// no token supplied
-		fmt.Println("No token supplied")
+		fmt.Println("oidc: No token supplied.")
 		return c.Status(401).SendString("Please login first.")
 	}
 
 	// check if access_token is valid via /introspect
 	if body := validateAccessToken(access_token); body == "" {
-		fmt.Println("Access token introspect failed")
+		fmt.Println("oidc: Access token introspect failed.")
 		return c.Status(401).SendString("Please login first.")
 	} else {
 		// Parse json in body
@@ -36,13 +36,13 @@ func oidc(c *fiber.Ctx) error {
 					// To do: verify scope
 					return c.Next()
 				} else {
-					fmt.Println("SSO context failed")
+					fmt.Println("oidc: SSO context failed.")
 					return c.Status(401).SendString("Please login first.")
 				}
 			}
 			c.Next()
 		} else {
-			fmt.Println("Token was not active")
+			fmt.Println("oidc: Token was not active.")
 			return c.Status(401).SendString("Please login first.")
 		}
 	}
