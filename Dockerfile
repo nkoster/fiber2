@@ -14,15 +14,10 @@ RUN \
     apt-transport-https \
     ca-certificates \
     curl \
-    git \
-    gnupg \
     inetutils-ping \
     less \
     locales \
     net-tools \
-    nginx \
-    openssh-client \
-    parallel \
     postgresql-client \
     telnet \
     time \
