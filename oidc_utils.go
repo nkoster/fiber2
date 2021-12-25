@@ -17,7 +17,7 @@ func getAccessToken(s string) string {
 
 	data := strings.Split(s, " ")
 
-	if len(data) > 0 {
+	if len(data) > 1 {
 		return data[1]
 	}
 
