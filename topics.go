@@ -24,7 +24,7 @@ func topics(c *fiber.Ctx) error {
 	id := ""
 	for rows.Next() {
 		topic := Topic{}
-		if err := rows.Scan(&id, &topic.Kafka_topic); err != nil {
+		if err := rows.Scan(&id, &topic.KafkaTopic); err != nil {
 			return err
 		}
 		result.Topics = append(result.Topics, topic)
