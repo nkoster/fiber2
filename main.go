@@ -76,8 +76,9 @@ func main() {
 		DisableStartupMessage: true,
 	})
 
-	fmt.Println("Serving static files: ./ui")
-	app.Static("/", "./ui")
+	UI := os.Getenv("UI")
+	fmt.Println("Serving static files:", UI)
+	app.Static("/", UI)
 
 	if os.Getenv("DEV_MODE") == "true" {
 		app.Use(cors.New())
