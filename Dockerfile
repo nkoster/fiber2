@@ -13,18 +13,7 @@ RUN \
     DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
     apt-transport-https \
     ca-certificates \
-    curl \
-    inetutils-ping \
-    less \
-    locales \
-    net-tools \
-    postgresql-client \
-    telnet \
-    time \
-    tzdata \
-    vim-tiny \
     kafkacat \
-    netcat \
     wget && \
     rm -rf /var/lib/apt/lists/ && \
     mkdir -p /app && \
