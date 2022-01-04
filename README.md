@@ -8,11 +8,14 @@ The kafkasearch-ui backend serves an API for a UI, that queries the database, an
 ### Build
 
 ```
+git clone git@github.com:nkoster/kafkasearch-ui
+cd kafkasearch-ui/
+rsync -a <UI build dir>/ ui/
 CGO_ENABLED=0 go build -ldflags="-extldflags=-static"
 docker build -t fhirstation-kafkasearch-ui .
 ```
 
-The UI directory holds the search UI frontend React App (internal project, not yet on Github)
+The <UI build dir> holds the search UI frontend React App (internal project, not yet on Github, read below)
 
 ### Third-party Resources
                                                                                                                    
