@@ -27,3 +27,7 @@ The UI directory holds the search UI frontend React App (internal project, not y
   <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" height="40px" alt="Docker">
 </div>
 <br />
+
+### More
+
+Nice page about compiling statically in Go: https://www.arp242.net/static-go.html
