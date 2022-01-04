@@ -17,10 +17,8 @@ The UI directory holds the React App (internal project, not yet on Github)
 ### Third-party Resources
                                                                                                                    
 * Gofiber: https://gofiber.io/ https://github.com/gofiber/fiber
-* Docker base: https://registry.hub.docker.com/_/busybox/
 * Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
-
-
+* Docker base: https://registry.hub.docker.com/_/busybox/
 
 <br />
 <div style="white-space:nowrap">
