@@ -5,7 +5,7 @@ keys/values and partitions/offsets.
 
 Kafkasearch-ui serves an API for a UI, that queries the database, and seeks for the raw kafka message.
 
-### Third-party resources
+### Third-party Resources
 * Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
 * Gofiber: https://github.com/gofiber/fiber
 
