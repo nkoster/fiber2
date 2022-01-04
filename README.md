@@ -9,7 +9,7 @@ The kafkasearch-ui backend serves an API for a UI, that queries the database, an
 
 ```
 CGO_ENABLED=0 go build -ldflags="-extldflags=-static
-docker build -t fhirstation-kafkasearch-ui
+docker build -t fhirstation-kafkasearch-ui .
 ```
 
 The UI directory holds the React App (internal project, not yet on Github)
