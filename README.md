@@ -10,7 +10,7 @@ The kafkasearch-ui backend serves an API for a UI, that queries the database, an
 ```
 git clone git@github.com:nkoster/kafkasearch-ui
 cd kafkasearch-ui/
-rsync -a &lt;UI build dir&gt;/ ui/
+rsync -a <UI build dir>/ ui/
 CGO_ENABLED=0 go build -ldflags="-extldflags=-static"
 docker build -t fhirstation-kafkasearch-ui .
 ```
