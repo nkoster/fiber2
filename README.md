@@ -75,4 +75,4 @@ You can disable the OIDC middleware entirely by using the environment variable `
 ### More Info
 
 * This is a complete project used at Portavita BV. But not all is published on Github. If you want to know more about searching and/or indexing kafka context (perhaps because you persist stuff (too?) long or even forever inside kafka), or you want to know more about how we implement data pipelines with spark, please contact me via niels/dot/koster/at/portavita/dot/nl
-* Nice page about compiling statically in Go: https://www.arp242.net/static-go.html
+* Nice page about compiling static binaries in Go: https://www.arp242.net/static-go.html
