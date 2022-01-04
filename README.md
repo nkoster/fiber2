@@ -15,5 +15,8 @@ docker build -t fhirstation-kafkasearch-ui .
 The UI directory holds the React App (internal project, not yet on Github)
 
 ### Third-party Resources
+
+<img src="https://gofiber.io/assets/images/logo.svg" height="40px" alt="Gofiber">
+
 * Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
-* Go<span style="text-align:bottom"><img src="https://gofiber.io/assets/images/logo.svg" height="30px" alt="Gofiber"></span> https://github.com/gofiber/fiber
+* Gofiber: https://gofiber.io/ https://github.com/gofiber/fiber
