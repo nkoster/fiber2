@@ -5,6 +5,12 @@ keys/values and partitions/offsets.
 
 The kafkasearch-ui backend serves an API for a UI, that queries the database, and seeks kafka for the raw kafka message.
 
+### Build
+
+```
+CGO_ENABLED=0 go build -ldflags="-extldflags=-static
+```
+
 ### Third-party Resources
 * Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
 * Gofiber: https://github.com/gofiber/fiber
