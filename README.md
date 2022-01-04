@@ -1,4 +1,4 @@
-# Kafka search UI backend
+# Kafka Search UI Backend
 
 For a limited/selected set of kafka topics, a data pipeline (spark) updates a postgres database with identifier
 keys/values and partitions/offsets.
