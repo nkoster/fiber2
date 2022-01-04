@@ -9,7 +9,10 @@ The kafkasearch-ui backend serves an API for a UI, that queries the database, an
 
 ```
 CGO_ENABLED=0 go build -ldflags="-extldflags=-static
+docker build -t fhirstation-kafkasearch-ui
 ```
+
+The UI directory holds the React App (internal project, not yet on Github)
 
 ### Third-party Resources
 * Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
