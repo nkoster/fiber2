@@ -1,9 +1,9 @@
 Kafka search UI backend.
 
-This program serves a UI that queries a postgres database for identifier keys and values in kafka messages.
+for a limited/selected set of kafka topics, a data pipeline (spark) updates a postgres database with identifier
+keys/values and partitions/offsets.
 
+This program serves a UI with an API that queries the database, and seeks for the raw kafka message.
 
-
-
-Statically compiled kafkacat docker image from 
-https://github.com/jcaesar/kafkacat-static
+Third-party resources:
+* Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
