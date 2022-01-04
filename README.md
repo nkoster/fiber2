@@ -16,11 +16,6 @@ docker build -t fhirstation-kafkasearch-ui .
 
 The `<UI build dir>` holds the search UI frontend React App (internal project, not yet on Github, read below)
 
-### OpenID-Connect
-
-The backend uses OIDC middleware, but that is currently still Work-in-Progress.
-You can disable the OIDC middleware by using the environment variable `USE_AUTH=false`
-
 ### Deploy
 
 You can deploy the docker image into your kubernetes machinery, we use Helm for that, but you can also run it locally.
@@ -30,10 +25,35 @@ In that case you need to provide configuration via "`.env`" and add the followin
 COPY .env /.env
 ```
 
-The following environment variables need to have proper values:
+The following environment variables need to have proper values, like:
 
 ```
+PG_HOST='localhost'
+PG_DATABASE='kafkasearch'
+PG_PORT='5432'
+PG_USER='fhirstation'
+PG_PASSWORD='postgres_password_123'
+PG_KEY_PATH='./client_postgres.key'
+PG_CERT_PATH='./client_postgres.crt'
+PG_ROOTCERT_PATH='./root.crt'
+PG_SSL_MODE='verify-ca'
+KAFKA_HOST='localhost:9092'
+OIDC_CERTS='http://oic.docker:8088:/certs'
+OIDC_INTROSPECT='http://oic.docker:8088/introspect'
+OIDC_API_USER='local-react-service'
+OIDC_API_PASSWORD='test'
+OIDC_SSO_CONTEXT='http://oic.docker:8088/ssocontext'
+# USE_AUTH='false'
+# DEV_MODE='true'
+UI='./ui'
 ```
+
+If you uncomment `DEV_MODE='true'`, you enable CORS flexibilty, handy for local UI development.
+
+### OpenID-Connect Authentication
+
+The backend uses OIDC middleware, but that is currently still Work-in-Progress.
+You can disable the OIDC middleware entirely by using the environment variable `USE_AUTH=false`
 
 ### Third-party Resources
                                                                                                                    
