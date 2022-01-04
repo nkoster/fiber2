@@ -7,7 +7,7 @@ Use case at Portavita BV: for a limited or selected set of kafka topics (FHIR re
 ### Build
 
 ```
-git clone git@github.com:nkoster/kafkasearch-ui
+git clone git@github.com:nkoster/kafkasearch-ui-backend.git
 cd kafkasearch-ui/
 rsync -a <UI build dir>/ ui/
 CGO_ENABLED=0 go build -ldflags="-extldflags=-static"
