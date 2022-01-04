@@ -23,7 +23,6 @@ The UI directory holds the search UI frontend React App (internal project, not y
 <br />
 <div style="white-space:nowrap">
   <img src="https://gofiber.io/assets/images/logo.svg" height="40px" alt="Gofiber"> &nbsp;
-  <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" height="40px" alt="Postgresql"> &nbsp;
   <img src="https://raw.githubusercontent.com/edenhill/kcat/master/resources/kcat_small.png" height="40px" alt="kafkacat"> &nbsp;
   <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" height="40px" alt="Docker">
 </div>
