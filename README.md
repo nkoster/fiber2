@@ -12,7 +12,7 @@ CGO_ENABLED=0 go build -ldflags="-extldflags=-static
 docker build -t fhirstation-kafkasearch-ui .
 ```
 
-The UI directory holds the React App (internal project, not yet on Github)
+The UI directory holds the search UI frontend React App (internal project, not yet on Github)
 
 ### Third-party Resources
                                                                                                                    
