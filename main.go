@@ -63,7 +63,7 @@ func main() {
 	fmt.Println(os.Args[0] + " starting.")
 
 	if err = godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Println("No .env file in current directory.")
 	}
 
 	if err = Connect(); err != nil {
