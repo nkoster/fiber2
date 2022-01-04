@@ -48,7 +48,7 @@ OIDC_SSO_CONTEXT='http://oic.docker:8088/ssocontext'
 UI='./ui'
 ```
 
-If you uncomment `DEV_MODE='true'`, you enable CORS flexibilty, handy for local UI development.
+If you uncomment DEV_MODE='true', you enable CORS flexibility, handy for local UI development.
 
 ### OpenID-Connect Authentication
 
