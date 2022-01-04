@@ -58,7 +58,7 @@ You can disable the OIDC middleware entirely by using the environment variable `
 
 ### Third-party Resources
                                                                                                                    
-* Gofiber: https://gofiber.io/ ♥ https://github.com/gofiber/fiber
+* Gofiber: https://gofiber.io/ ♥ https://github.com/gofiber/fiber ⭐
 * Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
 * Docker base: https://registry.hub.docker.com/_/busybox/
 * Busybox: https://www.busybox.net
