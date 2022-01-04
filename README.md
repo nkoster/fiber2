@@ -2,7 +2,7 @@
 
 The kafkasearch-ui backend serves an API for a UI, that queries the database, and consults kafka to fetch the raw kafka message as JSON.
 
-Our use case at Portavita BV: for a limited or selected set of kafka topics (FHIR resources), a data pipeline (spark) updates a postgres database with kafka message identifier key/value and partition/offset data.
+Use case at Portavita BV: for a limited or selected set of kafka topics (FHIR resources), a data pipeline (spark) updates a postgres database with kafka message identifier key/value and partition/offset data.
 
 ### Build
 
