@@ -16,11 +16,23 @@ docker build -t fhirstation-kafkasearch-ui .
 
 The `<UI build dir>` holds the search UI frontend React App (internal project, not yet on Github, read below)
 
-You can deploy the docker image into your kubernetes machinery, but can also run it locally.
+### OpenID-Connect
+
+The backend uses OIDC middleware, but that is currently still Work-in-Progress.
+You can disable the OIDC middleware by using the environment variable `USE_AUTH=false`
+
+### Deploy
+
+You can deploy the docker image into your kubernetes machinery, we use Helm for that, but you can also run it locally.
 In that case you need to provide configuration via "`.env`" and add the following to the `Dockerfile`:
 
 ```
 COPY .env /.env
+```
+
+The following environment variables need to have proper values:
+
+```
 ```
 
 ### Third-party Resources
