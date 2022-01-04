@@ -52,8 +52,8 @@ If you uncomment `DEV_MODE='true'`, you enable CORS flexibilty, handy for local 
 
 ### OpenID-Connect Authentication
 
-The kafkasearch-ui backend uses OIDC middleware, but that is currently still Work-in-Progress.
-
+The kafkasearch-ui backend is using OIDC middleware for authenticating AI requests,
+however, it's currently still Work-in-Progress.
 You can disable the OIDC middleware entirely by using the environment variable `USE_AUTH=false`
 
 ### Third-party Resources
