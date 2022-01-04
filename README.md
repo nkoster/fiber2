@@ -8,7 +8,7 @@ The kafkasearch-ui backend serves an API for a UI, that queries the database, an
 ### Build
 
 ```
-CGO_ENABLED=0 go build -ldflags="-extldflags=-static
+CGO_ENABLED=0 go build -ldflags="-extldflags=-static"
 docker build -t fhirstation-kafkasearch-ui .
 ```
 
