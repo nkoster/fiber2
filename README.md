@@ -18,5 +18,5 @@ The UI directory holds the React App (internal project, not yet on Github)
 
 <img src="https://gofiber.io/assets/images/logo.svg" height="40px" alt="Gofiber">
 
-* Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
 * Gofiber: https://gofiber.io/ https://github.com/gofiber/fiber
+* Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
