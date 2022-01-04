@@ -7,3 +7,5 @@ Kafkasearch-ui serves an API for a UI, that queries the database, and seeks for 
 
 ### Third-party resources
 * Statically compiled kafkacat docker image from https://github.com/jcaesar/kafkacat-static
+* Gofiber: https://github.com/gofiber/fiber
+
