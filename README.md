@@ -17,6 +17,13 @@ docker build -t fhirstation-kafkasearch-ui .
 
 The `<UI build dir>` holds the search UI frontend React App (internal project, not yet on Github, read below)
 
+You can deploy the docker image into your kubernetes machinery, but can also run it locally.
+In that case you need to provide configuration via "`.env`" and add the following to the `Dockerfile`:
+
+```
+COPY .env /.env
+```
+
 ### Third-party Resources
                                                                                                                    
 * Gofiber: https://gofiber.io/ https://github.com/gofiber/fiber
