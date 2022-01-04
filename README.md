@@ -31,5 +31,5 @@ The UI directory holds the search UI frontend React App (internal project, not y
 ### More
 
 * Nice page about compiling statically in Go: https://www.arp242.net/static-go.html
-* Note: this is a complete project used at Portavita BV. But not all is published on Github. If you want know more about searching and or indexing kafka messages, please contact me via niels/dot/koster/at/portavita/dot/nl
+* Note: this is a complete project used at Portavita BV. But not all is published on Github. If you want to know more about searching and/or indexing kafka messages, please contact me via niels/dot/koster/at/portavita/dot/nl
 
