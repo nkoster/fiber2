@@ -1,6 +1,6 @@
 # Kafka Search UI Backend
 
-The kafkasearch-ui backend is an API for a UI, that queries a postgresql database, and consults kafka to fetch a raw kafka message.
+The kafkasearch-ui backend is an API for a UI, that queries a postgresql database, and consults kafka to fetch a kafka message.
 
 Use case at Portavita BV: for a limited or selected set of kafka topics (FHIR resources), a data pipeline (spark) updates a postgres database with kafka message identifier key/value and partition/offset data, which enables us flexible searching inside kafka.
 
@@ -18,7 +18,7 @@ The `<UI build dir>` holds the search UI frontend React App (internal project, n
 
 ### Deploy
 
-You can deploy the docker image into your kubernetes machinery, we use Helm for that, but you can also run it locally.
+You can deploy the docker image into your kubernetes machinery, we use Helm for that. But you can also run it locally.
 In that case you need to provide configuration via "`.env`" and add the following to the `Dockerfile`:
 
 ```
