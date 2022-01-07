@@ -18,6 +18,7 @@ func kafka(c *fiber.Ctx) error {
 		Partition string `json:"partition"`
 		Offset    string `json:"offset"`
 	}{}
+
 	if err := c.BodyParser(&payload); err != nil {
 		return err
 	}
