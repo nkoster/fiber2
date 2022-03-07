@@ -20,7 +20,8 @@ func kafka(c *fiber.Ctx) error {
 	}{}
 
 	if err := c.BodyParser(&payload); err != nil {
-		return err
+		fmt.Println(err.Error())
+		return c.Status(500).SendString(err.Error())
 	}
 
 	c.Set("Content-type", "application/json; charset=utf-8")
