@@ -35,11 +35,11 @@ func validateAccessToken(token string) string {
 
 	req, err := http.NewRequest("POST", URL, strings.NewReader(v.Encode()))
 
-	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	req.SetBasicAuth(os.Getenv("OIDC_API_USER"), os.Getenv("OIDC_API_PASSWORD"))
 
@@ -54,6 +54,12 @@ func validateAccessToken(token string) string {
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	/*
+		JSON, looks like this: bodyText {"active":true,"exp":1646656120,"scope":"openid"}
+		This should verify the scope and return a boolean instead of the JSON string.
+	*/
+	fmt.Println("bodyText", string(bodyText))
 
 	return string(bodyText)
 
@@ -120,7 +126,9 @@ func verifySsoContext(token string, key string) bool {
 
 	json.Unmarshal(ssoJson, &sso)
 
-	// test if pv_entity_id == 3 (WIP)
-	return sso.Organization.PvEntityId == 3
+	fmt.Println(string(ssoJson))
+
+	// test if pv_entity_id == 3 == pvt_support1 / pv_entity_id == niels == 17899744)
+	return sso.Organization.PvEntityId == 17899744
 
 }
