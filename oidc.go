@@ -34,18 +34,18 @@ func oidc(c *fiber.Ctx) error {
 				if verifySsoContext(ssoContext, pemFile) {
 					// All good, allow access
 					// To do: verify scope
+					fmt.Println("oidc: " + access_token)
 					return c.Next()
 				} else {
 					fmt.Println("oidc: SSO context failed.")
 					return c.Status(401).SendString("Please login first.")
 				}
 			}
-			c.Next()
+			return c.Status(401).SendString("Please login first.")
 		} else {
 			fmt.Println("oidc: Token was not active.")
 			return c.Status(401).SendString("Please login first.")
 		}
 	}
 
-	return nil
 }
