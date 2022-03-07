@@ -8,4 +8,4 @@ COPY client_postgres.crt /client_postgres.crt
 COPY root.crt /root.crt
 COPY ui/ /ui/
 
-CMD ["/kafkasearch-ui"]
+CMD ["./kafkasearch-ui"]
