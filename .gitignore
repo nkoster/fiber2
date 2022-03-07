@@ -6,3 +6,4 @@ kafkasearch-ui
 .idea
 request.rest
 ui
+tmp/
