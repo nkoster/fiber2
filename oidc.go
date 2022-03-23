@@ -26,24 +26,17 @@ func oidc(c *fiber.Ctx) error {
 		// Test if token is active
 		var token_state TokenState
 		json.Unmarshal([]byte(body), &token_state)
-		if token_state.Active {
-			// get SSO context
-			ssoContext := getSsoContext(access_token)
-			// Verify ssoContext JWT
-			if len(ssoContext) > 1 {
-				if verifySsoContext(ssoContext, pemFile) {
-					// All good, allow access
-					// To do: verify scope
-					fmt.Println("oidc: " + access_token)
-					return c.Next()
-				} else {
-					fmt.Println("oidc: SSO context failed.")
-					return c.Status(401).SendString("Please login first.")
-				}
+		// Verify if token is active and if the scope is correct
+		if token_state.Scope == "openid" {
+			fmt.Println("oidc: Allowed:", token_state.Scope, access_token)
+			if token_state.Active {
+				return c.Next()
+			} else {
+				fmt.Println("oidc: Token was not active.")
+				return c.Status(401).SendString("Please login first.")
 			}
-			return c.Status(401).SendString("Please login first.")
 		} else {
-			fmt.Println("oidc: Token was not active.")
+			fmt.Printf("oidc: Scope %s not allowed\n", token_state.Scope)
 			return c.Status(401).SendString("Please login first.")
 		}
 	}
