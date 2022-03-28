@@ -27,7 +27,7 @@ func oidc(c *fiber.Ctx) error {
 		var token_state TokenState
 		json.Unmarshal([]byte(body), &token_state)
 		// Verify if token is active and if the scope is correct
-		if token_state.Scope == "openid" {
+		if token_state.Scope == "openid kafkasearch" {
 			fmt.Println("oidc: Allowed:", token_state.Scope, access_token)
 			if token_state.Active {
 				return c.Next()
