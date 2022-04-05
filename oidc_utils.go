@@ -54,13 +54,6 @@ func validateAccessToken(token string) string {
 		fmt.Println(err)
 	}
 
-	/*
-		JSON, looks like this: bodyText {"active":true,"exp":1646656120,"scope":"openid"}
-		This should verify the scope and return a boolean instead of the JSON string.
-		Should be scope "kafkasearch"
-	*/
-	fmt.Println("bodyText", string(bodyText))
-
 	return string(bodyText)
 
 }
