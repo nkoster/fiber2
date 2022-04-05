@@ -26,14 +26,15 @@ func kafka(c *fiber.Ctx) error {
 
 	c.Set("Content-type", "application/json; charset=utf-8")
 
-	out, err := exec.Command("kafkacat", "-C", "-b", os.Getenv("KAFKA_HOST"), "-t",
+	kafkaHost := os.Getenv("KAFKA_HOST")
+
+	out, err := exec.Command("kafkacat", "-C", "-b", kafkaHost, "-t",
 		payload.Topic, "-p", payload.Partition, "-o", payload.Offset, "-c", "1", "-e", "-q").Output()
 	if err != nil {
 		fmt.Println(err)
 		return c.Status(500).SendString(err.Error())
 	}
-
-	fmt.Println("kafka:", payload.Topic, payload.Partition, payload.Offset)
+	fmt.Println("kafka: kafkacat -C -b " + kafkaHost + " -t " + payload.Topic + " -p " + payload.Partition + " -o " + payload.Offset + " -c 1 -e -q")
 	return c.Send(out)
 
 }
