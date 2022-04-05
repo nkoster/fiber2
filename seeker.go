@@ -48,7 +48,7 @@ func seeker(c *fiber.Ctx) error {
 	}
 
 	if counter > 0 {
-		fmt.Println("Previous query was cancelled.")
+		fmt.Println("seeker: Previous query was cancelled.")
 	}
 
 	sqlSelect := `SELECT /*%s*/
